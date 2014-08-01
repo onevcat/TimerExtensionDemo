@@ -8,7 +8,7 @@
 
 import UIKit
 
-let defaultTimeInterval: NSTimeInterval = 1 * 60
+let defaultTimeInterval: NSTimeInterval = 5
 
 class ViewController: UIViewController {
                             
@@ -27,8 +27,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateLabel() {
+    private func updateLabel() {
         lblTimer.text = timer.leftTimeString
+    }
+    
+    private func showFinishAlert(# finished: Bool) {
+        let ac = UIAlertController(title: nil , message: finished ? "Finished" : "Stopped", preferredStyle: .Alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {[weak ac] action in ac!.dismissViewControllerAnimated(true, completion: nil)}))
+            
+        presentViewController(ac, animated: true, completion: nil)
     }
 
     @IBAction func btnStartPressed(sender: AnyObject) {
@@ -37,22 +44,31 @@ class ViewController: UIViewController {
         }
         
         let (started, error) = timer.start(updateTick: {
-            [weak self] leftTick in self!.updateLabel()
+                [weak self] leftTick in self!.updateLabel()
             }, stopHandler: {
-                finished in println(finished)
+                [weak self] finished in
+                self!.showFinishAlert(finished: finished)
+                self!.timer = nil
             })
         
         if started {
             updateLabel()
         } else {
-            if let err = error {
-                println("error: \(err.code)")
+            if let realError = error {
+                println("error: \(realError.code)")
             }
         }
     }
     
     @IBAction func btnStopPressed(sender: AnyObject) {
-        
+        if let realTimer = timer {
+            let (stopped, error) = realTimer.stop()
+            if !stopped {
+                if let realError = error {
+                    println("error: \(realError.code)")
+                }
+            }
+        }
     }
 
 }

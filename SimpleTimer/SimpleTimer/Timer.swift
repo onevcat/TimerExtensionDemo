@@ -75,12 +75,12 @@ class Timer: NSObject {
         
         running = true
         
-        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:"countTick", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:"countTick", userInfo: nil, repeats: true)
         
         return (true, nil)
     }
     
-    func stop() -> (start: Bool, error: NSError?) {
+    func stop() -> (stopped: Bool, error: NSError?) {
         if !running {
             return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.NotRunning.toRaw(), userInfo:nil))
         }
@@ -90,7 +90,7 @@ class Timer: NSObject {
         timer = nil
         
         if let stopHandler = timerStopHandler {
-            stopHandler(true)
+            stopHandler(leftTime <= 0)
         }
         
         timerStopHandler = nil
@@ -101,12 +101,12 @@ class Timer: NSObject {
     
     @objc private func countTick() {
         leftTime = leftTime - 1
-        if leftTime > 0 {
-            if let tickHandler = timerTickHandler {
-                tickHandler(leftTime)
-            }
-        } else {
+        if let tickHandler = timerTickHandler {
+            tickHandler(leftTime)
+        }
+        if leftTime <= 0 {
             stop()
         }
+
     }
 }
