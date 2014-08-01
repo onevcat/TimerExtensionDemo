@@ -12,6 +12,7 @@
 		D127E247198B34FC00A09E62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D127E245198B34FC00A09E62 /* Main.storyboard */; };
 		D127E249198B34FC00A09E62 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D127E248198B34FC00A09E62 /* Images.xcassets */; };
 		D127E255198B34FC00A09E62 /* SimpleTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D127E254198B34FC00A09E62 /* SimpleTimerTests.swift */; };
+		D1B6B785198B5EC700DCF3A3 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B6B784198B5EC700DCF3A3 /* Timer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		D127E24E198B34FC00A09E62 /* SimpleTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D127E253198B34FC00A09E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D127E254198B34FC00A09E62 /* SimpleTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimerTests.swift; sourceTree = "<group>"; };
+		D1B6B784198B5EC700DCF3A3 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				D127E245198B34FC00A09E62 /* Main.storyboard */,
 				D127E248198B34FC00A09E62 /* Images.xcassets */,
 				D127E23F198B34FC00A09E62 /* Supporting Files */,
+				D1B6B784198B5EC700DCF3A3 /* Timer.swift */,
 			);
 			path = SimpleTimer;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B6B785198B5EC700DCF3A3 /* Timer.swift in Sources */,
 				D127E244198B34FC00A09E62 /* ViewController.swift in Sources */,
 				D127E242198B34FC00A09E62 /* AppDelegate.swift in Sources */,
 			);
@@ -397,6 +401,7 @@
 				D127E25A198B34FC00A09E62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D127E25B198B34FC00A09E62 /* Build configuration list for PBXNativeTarget "SimpleTimerTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +410,7 @@
 				D127E25D198B34FC00A09E62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
