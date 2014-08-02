@@ -8,6 +8,9 @@
 
 import UIKit
 
+let keyLeftTime = "com.onevcat.simpleTimer.lefttime"
+let keyQuitDate = "com.onevcat.simpleTimer.quitdate"
+
 let timerErrorDomain = "SimpleTimerError"
 
 enum SimperTimerError: Int {

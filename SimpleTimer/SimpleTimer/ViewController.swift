@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive",
+            name: UIApplicationWillResignActiveNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +37,36 @@ class ViewController: UIViewController {
         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {[weak ac] action in ac!.dismissViewControllerAnimated(true, completion: nil)}))
             
         presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    @objc private func applicationWillResignActive() {
+        println("app will resign active")
+
+        if timer == nil {
+            clearDefaults()
+        } else {
+            if timer.running {
+                saveDefaults()
+            } else {
+                clearDefaults()
+            }
+        }
+    }
+    
+    private func saveDefaults() {
+        let userDefault = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults")
+        userDefault.setInteger(Int(timer.leftTime), forKey: keyLeftTime)
+        userDefault.setInteger(Int(NSDate().timeIntervalSince1970), forKey: keyQuitDate)
+        
+        userDefault.synchronize()
+    }
+    
+    private func clearDefaults() {
+        let userDefault = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults")
+        userDefault.removeObjectForKey(keyLeftTime)
+        userDefault.removeObjectForKey(keyQuitDate)
+        
+        userDefault.synchronize()
     }
 
     @IBAction func btnStartPressed(sender: AnyObject) {
