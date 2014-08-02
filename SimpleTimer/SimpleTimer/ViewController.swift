@@ -9,7 +9,8 @@
 import UIKit
 import SimpleTimerKit
 
-let defaultTimeInterval: NSTimeInterval = 25 * 60
+let defaultTimeInterval: NSTimeInterval = 10
+let taskDidFinishedInWidgetNotification: String = "com.onevcat.simpleTimer.TaskDidFinishedInWidgetNotification"
 
 class ViewController: UIViewController {
                             
@@ -20,8 +21,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive",
-            name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: "applicationWillResignActive",name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: "taskFinishedInWidget", name: taskDidFinishedInWidgetNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,8 +44,6 @@ class ViewController: UIViewController {
     }
     
     @objc private func applicationWillResignActive() {
-        println("app will resign active")
-
         if timer == nil {
             clearDefaults()
         } else {
@@ -50,6 +51,17 @@ class ViewController: UIViewController {
                 saveDefaults()
             } else {
                 clearDefaults()
+            }
+        }
+    }
+    
+    @objc private func taskFinishedInWidget() {
+        if let realTimer = timer {
+            let (stopped, error) = realTimer.stop(false)
+            if !stopped {
+                if let realError = error {
+                    println("error: \(realError.code)")
+                }
             }
         }
     }
@@ -94,7 +106,7 @@ class ViewController: UIViewController {
     
     @IBAction func btnStopPressed(sender: AnyObject) {
         if let realTimer = timer {
-            let (stopped, error) = realTimer.stop()
+            let (stopped, error) = realTimer.stop(true)
             if !stopped {
                 if let realError = error {
                     println("error: \(realError.code)")

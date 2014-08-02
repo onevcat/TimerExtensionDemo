@@ -8,25 +8,56 @@
 
 import UIKit
 import NotificationCenter
+import SimpleTimerKit
 
 class TodayViewController: UIViewController {
         
-    @IBOutlet weak var lblTImer: UILabel!
+    @IBOutlet weak var lblTimer: UILabel!
+    
+    var timer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
 
         let userDefaults = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults")
-        let leftTimeWhenQuit = userDefaults.integerForKey("com.onevcat.simpleTimer.lefttime")
-        let quitDate = userDefaults.integerForKey("com.onevcat.simpleTimer.quitdate")
+        let leftTimeWhenQuit = userDefaults.integerForKey(keyLeftTime)
+        let quitDate = userDefaults.integerForKey(keyQuitDate)
         
         let passedTimeFromQuit = NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: NSTimeInterval(quitDate)))
         
         let leftTime = leftTimeWhenQuit - Int(passedTimeFromQuit)
         
-        lblTImer.text = "\(leftTime)"
+        if (leftTime > 0) {
+            timer = Timer(timeInteral: NSTimeInterval(leftTime))
+            timer.start(updateTick: {
+                [weak self] leftTick in self!.updateLabel()
+                }, stopHandler: {
+                    [weak self] finished in self!.showOpenAppButton()
+                })
+        } else {
+            showOpenAppButton()
+        }
+    }
+    
+    private func updateLabel() {
+        lblTimer.text = timer.leftTimeString
+    }
+    
+    private func showOpenAppButton() {
+        lblTimer.text = "Finished"
+        preferredContentSize = CGSizeMake(0, 100)
         
+        let button = UIButton(frame: CGRectMake(0, 50, 50, 63))
+        button.setTitle("Open", forState: UIControlState.Normal)
+        button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+
+        view.addSubview(button)
+        
+    }
+    
+    @objc private func buttonPressed(sender: AnyObject!) {
+        extensionContext.openURL(NSURL(string: "simpleTimer://finished"), completionHandler: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,7 +71,7 @@ class TodayViewController: UIViewController {
         // If an error is encoutered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
-
+        
         completionHandler(NCUpdateResult.NewData)
     }
     

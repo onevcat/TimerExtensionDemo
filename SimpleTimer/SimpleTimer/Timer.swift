@@ -83,7 +83,7 @@ public class Timer: NSObject {
         return (true, nil)
     }
     
-    public func stop() -> (stopped: Bool, error: NSError?) {
+    public func stop(interrupt: Bool) -> (stopped: Bool, error: NSError?) {
         if !running {
             return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.NotRunning.toRaw(), userInfo:nil))
         }
@@ -93,7 +93,7 @@ public class Timer: NSObject {
         timer = nil
         
         if let stopHandler = timerStopHandler {
-            stopHandler(leftTime <= 0)
+            stopHandler(!interrupt)
         }
         
         timerStopHandler = nil
@@ -108,7 +108,7 @@ public class Timer: NSObject {
             tickHandler(leftTime)
         }
         if leftTime <= 0 {
-            stop()
+            stop(false)
         }
 
     }
