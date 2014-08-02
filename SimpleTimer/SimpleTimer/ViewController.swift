@@ -8,7 +8,7 @@
 
 import UIKit
 
-let defaultTimeInterval: NSTimeInterval = 5
+let defaultTimeInterval: NSTimeInterval = 25 * 60
 
 class ViewController: UIViewController {
                             
