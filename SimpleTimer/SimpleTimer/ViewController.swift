@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SimpleTimerKit
 
 let defaultTimeInterval: NSTimeInterval = 25 * 60
 

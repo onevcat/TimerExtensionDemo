@@ -8,12 +8,12 @@
 
 import UIKit
 
-let keyLeftTime = "com.onevcat.simpleTimer.lefttime"
-let keyQuitDate = "com.onevcat.simpleTimer.quitdate"
+public let keyLeftTime = "com.onevcat.simpleTimer.lefttime"
+public let keyQuitDate = "com.onevcat.simpleTimer.quitdate"
 
 let timerErrorDomain = "SimpleTimerError"
 
-enum SimperTimerError: Int {
+public enum SimperTimerError: Int {
     case AlreadyRunning = 1001
     case NegativeLeftTime = 1002
     case NotRunning = 1003
@@ -38,11 +38,11 @@ extension NSTimeInterval {
     }
 }
 
-class Timer: NSObject {
+public class Timer: NSObject {
     
-    var running: Bool = false
+    public var running: Bool = false
     
-    var leftTime: NSTimeInterval {
+    public var leftTime: NSTimeInterval {
     didSet {
         if leftTime < 0 {
             leftTime = 0
@@ -50,7 +50,7 @@ class Timer: NSObject {
     }
     }
     
-    var leftTimeString: String {
+    public var leftTimeString: String {
     get {
         return leftTime.toString()
     }
@@ -60,11 +60,11 @@ class Timer: NSObject {
     private var timerStopHandler: (Bool ->())? = nil
     private var timer: NSTimer!
     
-    init(timeInteral: NSTimeInterval) {
+    public init(timeInteral: NSTimeInterval) {
         leftTime = timeInteral
     }
     
-    func start(#updateTick: (leftTick: NSTimeInterval -> Void)?, stopHandler: (finished: Bool -> Void)?) -> (start: Bool, error: NSError?) {
+    public func start(#updateTick: (leftTick: NSTimeInterval -> Void)?, stopHandler: (finished: Bool -> Void)?) -> (start: Bool, error: NSError?) {
         if running {
             return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.AlreadyRunning.toRaw(), userInfo:nil))
         }
@@ -83,7 +83,7 @@ class Timer: NSObject {
         return (true, nil)
     }
     
-    func stop() -> (stopped: Bool, error: NSError?) {
+    public func stop() -> (stopped: Bool, error: NSError?) {
         if !running {
             return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.NotRunning.toRaw(), userInfo:nil))
         }
