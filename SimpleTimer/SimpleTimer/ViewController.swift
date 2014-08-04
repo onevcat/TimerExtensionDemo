@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         presentViewController(ac, animated: true, completion: nil)
     }
     
-    @objc private func applicationWillResignActive() {
+    dynamic private func applicationWillResignActive() {
         if timer == nil {
             clearDefaults()
         } else {
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc private func taskFinishedInWidget() {
+    dynamic private func taskFinishedInWidget() {
         if let realTimer = timer {
             let (stopped, error) = realTimer.stop(false)
             if !stopped {

@@ -102,7 +102,7 @@ public class Timer: NSObject {
         return (true, nil)
     }
     
-    @objc private func countTick() {
+    dynamic private func countTick() {
         leftTime = leftTime - 1
         if let tickHandler = timerTickHandler {
             tickHandler(leftTime)

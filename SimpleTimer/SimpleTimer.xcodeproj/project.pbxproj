@@ -21,7 +21,8 @@
 		D12A1849198CB9EF007CE843 /* SimpleTimerKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A1848198CB9EF007CE843 /* SimpleTimerKitTests.swift */; };
 		D12A184C198CB9EF007CE843 /* SimpleTimerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12A1837198CB9EF007CE843 /* SimpleTimerKit.framework */; };
 		D12A184D198CB9EF007CE843 /* SimpleTimerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D12A1837198CB9EF007CE843 /* SimpleTimerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D1B6B785198B5EC700DCF3A3 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B6B784198B5EC700DCF3A3 /* Timer.swift */; };
+		D12A185F198CBA3A007CE843 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B6B784198B5EC700DCF3A3 /* Timer.swift */; };
+		D12A1860198CBBB5007CE843 /* SimpleTimerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12A1837198CB9EF007CE843 /* SimpleTimerKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,27 @@
 			remoteInfo = SimpleTimerKit;
 		};
 		D12A1857198CB9F1007CE843 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D127E234198B34FC00A09E62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D12A1836198CB9EF007CE843;
+			remoteInfo = SimpleTimerKit;
+		};
+		D12A1859198CB9F1007CE843 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D127E234198B34FC00A09E62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D12A1836198CB9EF007CE843;
+			remoteInfo = SimpleTimerKit;
+		};
+		D12A185B198CB9F1007CE843 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D127E234198B34FC00A09E62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D12A1836198CB9EF007CE843;
+			remoteInfo = SimpleTimerKit;
+		};
+		D12A185D198CB9F1007CE843 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D127E234198B34FC00A09E62 /* Project object */;
 			proxyType = 1;
@@ -147,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D12A1860198CBBB5007CE843 /* SimpleTimerKit.framework in Frameworks */,
 				D12A181F198CB2E0007CE843 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +420,9 @@
 			dependencies = (
 				D12A1844198CB9EF007CE843 /* PBXTargetDependency */,
 				D12A1858198CB9F1007CE843 /* PBXTargetDependency */,
+				D12A185A198CB9F1007CE843 /* PBXTargetDependency */,
+				D12A185C198CB9F1007CE843 /* PBXTargetDependency */,
+				D12A185E198CB9F1007CE843 /* PBXTargetDependency */,
 			);
 			name = SimpleTimerKitTests;
 			productName = SimpleTimerKitTests;
@@ -512,7 +538,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1B6B785198B5EC700DCF3A3 /* Timer.swift in Sources */,
 				D127E244198B34FC00A09E62 /* ViewController.swift in Sources */,
 				D127E242198B34FC00A09E62 /* AppDelegate.swift in Sources */,
 			);
@@ -538,6 +563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D12A185F198CBA3A007CE843 /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +612,21 @@
 			isa = PBXTargetDependency;
 			target = D12A1836198CB9EF007CE843 /* SimpleTimerKit */;
 			targetProxy = D12A1857198CB9F1007CE843 /* PBXContainerItemProxy */;
+		};
+		D12A185A198CB9F1007CE843 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D12A1836198CB9EF007CE843 /* SimpleTimerKit */;
+			targetProxy = D12A1859198CB9F1007CE843 /* PBXContainerItemProxy */;
+		};
+		D12A185C198CB9F1007CE843 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D12A1836198CB9EF007CE843 /* SimpleTimerKit */;
+			targetProxy = D12A185B198CB9F1007CE843 /* PBXContainerItemProxy */;
+		};
+		D12A185E198CB9F1007CE843 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D12A1836198CB9EF007CE843 /* SimpleTimerKit */;
+			targetProxy = D12A185D198CB9F1007CE843 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -773,6 +814,7 @@
 		D12A1851198CB9F0007CE843 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -795,6 +837,7 @@
 		D12A1852198CB9F0007CE843 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

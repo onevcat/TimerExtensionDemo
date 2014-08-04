@@ -10,7 +10,7 @@ import UIKit
 import NotificationCenter
 import SimpleTimerKit
 
-class TodayViewController: UIViewController {
+class TodayViewController: UIViewController, NCWidgetProviding {
         
     @IBOutlet weak var lblTimer: UILabel!
     
@@ -56,7 +56,7 @@ class TodayViewController: UIViewController {
         
     }
     
-    @objc private func buttonPressed(sender: AnyObject!) {
+    dynamic private func buttonPressed(sender: AnyObject!) {
         extensionContext.openURL(NSURL(string: "simpleTimer://finished"), completionHandler: nil)
     }
     
