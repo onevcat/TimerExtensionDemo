@@ -67,19 +67,21 @@ class ViewController: UIViewController {
     }
     
     private func saveDefaults() {
-        let userDefault = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults")
-        userDefault.setInteger(Int(timer.leftTime), forKey: keyLeftTime)
-        userDefault.setInteger(Int(NSDate().timeIntervalSince1970), forKey: keyQuitDate)
-        
-        userDefault.synchronize()
+        if let userDefault = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults") {
+            userDefault.setInteger(Int(timer.leftTime), forKey: keyLeftTime)
+            userDefault.setInteger(Int(NSDate().timeIntervalSince1970), forKey: keyQuitDate)
+            
+            userDefault.synchronize()
+        }
     }
     
     private func clearDefaults() {
-        let userDefault = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults")
-        userDefault.removeObjectForKey(keyLeftTime)
-        userDefault.removeObjectForKey(keyQuitDate)
-        
-        userDefault.synchronize()
+        if let userDefault = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults") {
+            userDefault.removeObjectForKey(keyLeftTime)
+            userDefault.removeObjectForKey(keyQuitDate)
+            
+            userDefault.synchronize()
+        }
     }
 
     @IBAction func btnStartPressed(sender: AnyObject) {

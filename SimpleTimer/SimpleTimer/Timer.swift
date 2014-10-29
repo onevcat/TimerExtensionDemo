@@ -64,13 +64,13 @@ public class Timer: NSObject {
         leftTime = timeInteral
     }
     
-    public func start(#updateTick: (leftTick: NSTimeInterval -> Void)?, stopHandler: (finished: Bool -> Void)?) -> (start: Bool, error: NSError?) {
+    public func start(#updateTick: (NSTimeInterval -> Void)?, stopHandler: (Bool -> Void)?) -> (start: Bool, error: NSError?) {
         if running {
-            return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.AlreadyRunning.toRaw(), userInfo:nil))
+            return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.AlreadyRunning.rawValue, userInfo:nil))
         }
         
         if leftTime < 0 {
-            return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.NegativeLeftTime.toRaw(), userInfo:nil))
+            return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.NegativeLeftTime.rawValue, userInfo:nil))
         }
         
         timerTickHandler = updateTick
@@ -85,7 +85,7 @@ public class Timer: NSObject {
     
     public func stop(interrupt: Bool) -> (stopped: Bool, error: NSError?) {
         if !running {
-            return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.NotRunning.toRaw(), userInfo:nil))
+            return (false, NSError(domain: timerErrorDomain, code: SimperTimerError.NotRunning.rawValue, userInfo:nil))
         }
         
         running = false

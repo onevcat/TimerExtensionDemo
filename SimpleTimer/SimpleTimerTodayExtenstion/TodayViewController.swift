@@ -20,23 +20,24 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
 
-        let userDefaults = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults")
-        let leftTimeWhenQuit = userDefaults.integerForKey(keyLeftTime)
-        let quitDate = userDefaults.integerForKey(keyQuitDate)
-        
-        let passedTimeFromQuit = NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: NSTimeInterval(quitDate)))
-        
-        let leftTime = leftTimeWhenQuit - Int(passedTimeFromQuit)
-        
-        if (leftTime > 0) {
-            timer = Timer(timeInteral: NSTimeInterval(leftTime))
-            timer.start(updateTick: {
-                [weak self] leftTick in self!.updateLabel()
-                }, stopHandler: {
-                    [weak self] finished in self!.showOpenAppButton()
-                })
-        } else {
-            showOpenAppButton()
+        if let userDefaults = NSUserDefaults(suiteName: "group.simpleTimerSharedDefaults") {
+            let leftTimeWhenQuit = userDefaults.integerForKey(keyLeftTime)
+            let quitDate = userDefaults.integerForKey(keyQuitDate)
+            
+            let passedTimeFromQuit = NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: NSTimeInterval(quitDate)))
+            
+            let leftTime = leftTimeWhenQuit - Int(passedTimeFromQuit)
+            
+            if (leftTime > 0) {
+                timer = Timer(timeInteral: NSTimeInterval(leftTime))
+                timer.start(updateTick: {
+                    [weak self] leftTick in self!.updateLabel()
+                    }, stopHandler: {
+                        [weak self] finished in self!.showOpenAppButton()
+                    })
+            } else {
+                showOpenAppButton()
+            }
         }
     }
     
@@ -57,7 +58,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     dynamic private func buttonPressed(sender: AnyObject!) {
-        extensionContext.openURL(NSURL(string: "simpleTimer://finished"), completionHandler: nil)
+        extensionContext?.openURL(NSURL(string: "simpleTimer://finished")!, completionHandler: nil)
     }
     
     override func didReceiveMemoryWarning() {
